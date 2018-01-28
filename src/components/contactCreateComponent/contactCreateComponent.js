@@ -12,7 +12,16 @@ export default class ContactCreate extends Component {
     this.changePostcode = this.changePostcode.bind(this)
     this.changeAddress = this.changeAddress.bind(this)
     this.changeDate = this.changeDate.bind(this)
+    this.addPlate = this.addPlate.bind(this)
+    this.clearPlate = this.clearPlate.bind(this)
 
+  }
+
+  clearPlate(){
+    this.props.changeStateProps('name', '')
+  }
+  addPlate(){
+    console.log("add");
   }
   componentDidMount () {
     console.log('props in component', this.props)
@@ -38,7 +47,7 @@ export default class ContactCreate extends Component {
   render () {
     return (
 
-    <form >
+    <form className="plate" >
       <div className="item">
         <label className='input__label'>Name : </label>
         <input
@@ -96,6 +105,16 @@ export default class ContactCreate extends Component {
             onChange={this.changeDate}
             value={this.props.someUserDate}
         />
+        <footer className="plate__footer">
+          <button
+              onClick={this.addPlate}
+              className="button button__add">
+          </button>
+          <button
+              onClick={this.clearPlate}
+              className="button button__clear">
+          </button>
+        </footer>
       </div>
     </form>
     )

@@ -9,4 +9,10 @@ body {
   margin: 0;
   padding: 0; }
 
+.list {
+  display: flex;
+  flex: 1 1 350px;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
 /*# sourceMappingURL=mainComponent.css.map */

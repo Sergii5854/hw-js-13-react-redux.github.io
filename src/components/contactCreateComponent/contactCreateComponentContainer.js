@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { changeStateProps } from '../../actions'
-import TestComponent from './testComponent'
+import contactCreate from './contactCreateComponent'
 
 const mapStateToProps = (state, ownProps) => {
   console.log('state', state)
@@ -22,4 +22,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)(TestComponent)
+  mapDispatchToProps)(contactCreate)

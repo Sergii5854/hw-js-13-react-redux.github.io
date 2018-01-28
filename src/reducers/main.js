@@ -1,7 +1,7 @@
 import update from 'immutability-helper'
 
 let defaultState = {
-  name: 'Danya'
+  name: 'Test name main.js'
 }
 
 const main = (state = defaultState, action) => {

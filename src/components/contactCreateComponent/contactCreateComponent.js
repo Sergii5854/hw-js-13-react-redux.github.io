@@ -6,7 +6,7 @@ import './contactCreateComponent.css'
 export default class ContactCreate extends Component {
   constructor(props) {
     super(props)
-
+    this.reset = {}
     this.state = {
       name: '',
       email: '',
@@ -27,8 +27,19 @@ export default class ContactCreate extends Component {
 
     this.addPlate = this.addPlate.bind(this)
     this.clearPlate = this.clearPlate.bind(this)
+    this.clearState = this.clearState.bind(this)
 
   }
+clearState(){
+  this.setState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    postcode: '',
+    date: '',
+  });
+}
 
   clearPlate(e) {
     e.preventDefault()
@@ -39,7 +50,7 @@ export default class ContactCreate extends Component {
     this.props.changeStateProps('postcode', '');
     this.props.changeStateProps('date', '');
 
-
+    this.clearState()
 
   }
 
@@ -54,7 +65,7 @@ export default class ContactCreate extends Component {
     this.props.changeStateProps('date', this.state.date);
 
 
-
+    this.clearState()
   }
 
   componentDidMount() {

@@ -14,6 +14,13 @@ export default class ContactCreate extends Component {
       address: '',
       postcode: '',
       date: '',
+
+      nameValid: false,
+      emailValid: false,
+      phoneValid: false,
+      postcodeValid: false,
+      dateValid: false,
+      formValid: false
     };
 
 
@@ -45,13 +52,17 @@ export default class ContactCreate extends Component {
         postcode: '',
         date: '',
       },
+      nameValid: false,
       emailValid: false,
+      phoneValid: false,
+      postcodeValid: false,
+      dateValid: false,
       formValid: false
     });
   }
 
   clearPlate(e) {
-    e.preventDefault()
+    e.preventDefault();
     this.props.changeStateProps('name', '');
     this.props.changeStateProps('email', '');
     this.props.changeStateProps('phone', '');
@@ -69,58 +80,58 @@ export default class ContactCreate extends Component {
     document.querySelectorAll('.input__style').forEach((item) => {
       item.classList.remove('input__error')
     });
-    console.log("valid mail", this.state.emailValid);
-    console.log(!!this.state.name.length
-        && !!this.state.email.length
-        && !!this.state.postcode.length
-        && !!this.state.date.length);
-    if (!!this.state.name.length
-        && this.state.emailValid !== false && this.state.emailValid !== undefined
-        && !!this.state.postcode.length
-        && !!this.state.date.length
-    ) {
 
-      if (!!this.state.name.length) {
+    if (this.state.nameValid !== false && this.state.nameValid !== undefined
+        && this.state.emailValid !== false && this.state.emailValid !== undefined
+        && this.state.postcodeValid !== false && this.state.postcodeValid !== undefined
+        && this.state.dateValid !== false && this.state.dateValid !== undefined){
+
+      if (this.state.nameValid === true) {
         this.props.changeStateProps('name', this.state.name);
       } else {
         document.querySelector('.input__name').classList.add('input__error')
       }
+
       if (this.state.emailValid === true) {
         this.props.changeStateProps('email', this.state.email);
       } else {
         document.querySelector('.input__email').classList.add('input__error')
       }
+
       this.props.changeStateProps('phone', this.state.phone);
       this.props.changeStateProps('address', this.state.address);
-      if (!!this.state.postcode.length) {
+
+      if (this.state.postcodeValid === true) {
         this.props.changeStateProps('postcode', this.state.postcode);
       } else {
         document.querySelector('.input__postcode').classList.add('input__error')
       }
-      if (this.state.date.length) {
+
+      if (this.state.dateValid === true) {
         this.props.changeStateProps('date', this.state.date);
       } else {
         document.querySelector('.input__date').classList.add('input__error')
       }
+
+      this.clearState()
+
     } else {
-      console.log(!this.state.name.length);
-      if (!this.state.name.length) {
+
+      if (this.state.nameValid === false || this.state.nameValid === undefined) {
         document.querySelector('.input__name').classList.add('input__error')
       }
-      console.log(this.state.emailValid);
+
       if (this.state.emailValid === false || this.state.emailValid === undefined) {
         document.querySelector('.input__email').classList.add('input__error')
       }
 
-      if (!this.state.postcode.length) {
+      if (this.state.postcodeValid === false || this.state.postcodeValid === undefined) {
         document.querySelector('.input__postcode').classList.add('input__error')
       }
-      if (!this.state.date.length) {
+      if (this.state.dateValid === false || this.state.dateValid === undefined) {
         document.querySelector('.input__date').classList.add('input__error')
       }
 
-
-      // this.clearState()
 
     }
   }
@@ -131,35 +142,54 @@ export default class ContactCreate extends Component {
 
   changeName(event) {
     this.setState({name: event.target.value});
+
+    if (event.target.value.length > 2) {
+      this.setState({nameValid: true});
+    } else {
+      this.setState({nameValid: false});
+    }
   }
 
   changeEmail(event) {
     this.setState({email: event.target.value});
-    console.log(event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null);
+
     if (event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null) {
       this.setState({emailValid: true});
+    } else {
+      this.setState({emailValid: false});
     }
   }
 
   changePhone(event) {
-    if (event.target.value.match(/^[0-9]+$/) != null) {
+    if (event.target.value.match(/^[0-9]+$/) !== null) {
       this.setState({phone: event.target.value});
     }
   }
 
   changeAddress(event) {
-    // this.props.changeStateProps('address', value)
     this.setState({address: event.target.value});
   }
 
   changePostcode(event) {
-    // this.props.changeStateProps('postcode', value)
+
     this.setState({postcode: event.target.value});
+
+    if (event.target.value.length >= 5 && event.target.value.length < 10) {
+      this.setState({postcodeValid: true});
+    } else {
+       this.setState({postcodeValid: false});
+    }
   }
 
   changeDate(event) {
-    // this.props.changeStateProps('date', value)
+
     this.setState({date: event.target.value});
+
+    if (event.target.value.match(/(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/)) {
+      this.setState({dateValid: true});
+    } else {
+       this.setState({dateValid: false});
+    }
   }
 
   render() {

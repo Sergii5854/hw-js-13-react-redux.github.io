@@ -46,13 +46,14 @@ export default class ContactCreate extends Component {
   addPlate(e) {
     e.preventDefault()
 
+    this.props.changeStateProps('name', this.state.name);
+    this.props.changeStateProps('email', this.state.email);
+    this.props.changeStateProps('phone', this.state.phone);
+    this.props.changeStateProps('address', this.state.address);
+    this.props.changeStateProps('postcode', this.state.postcode);
+    this.props.changeStateProps('date', this.state.date);
 
-   if(!!this.props.someUserName && typeof this.props.someUserName ==='string') {
-     console.log( typeof this.props.someUserName ==='string' );
-     this.props.changeStateProps('name', this.props.someUserName)
-   }else{
 
-   }
 
   }
 
@@ -60,28 +61,32 @@ export default class ContactCreate extends Component {
     console.log('props in component', this.props)
   }
 
-  changeName(event) {
-    this.setState({name: event.name})
+  changeName(event) {  
+    this.setState({name: event.target.value});
   }
 
-  changeEmail({target: {value}}) {
-    this.props.changeStateProps('email', value)
+  changeEmail(event) {
+    this.setState({email: event.target.value});
   }
 
-  changePhone({target: {value}}) {
-    this.props.changeStateProps('phone', value)
+  changePhone(event) {
+    // this.props.changeStateProps('phone', value)
+    this.setState({phone: event.target.value});
   }
 
-  changeAddress({target: {value}}) {
-    this.props.changeStateProps('address', value)
+  changeAddress(event) {
+    // this.props.changeStateProps('address', value)
+    this.setState({address: event.target.value});
   }
 
-  changePostcode({target: {value}}) {
-    this.props.changeStateProps('postcode', value)
+  changePostcode(event) {
+    // this.props.changeStateProps('postcode', value)
+    this.setState({postcode: event.target.value});
   }
 
-  changeDate({target: {value}}) {
-    this.props.changeStateProps('date', value)
+  changeDate(event) {
+    // this.props.changeStateProps('date', value)
+    this.setState({date: event.target.value});
   }
 
   render() {
@@ -103,7 +108,7 @@ export default class ContactCreate extends Component {
               type='text'
               placeholder='Email'
               onChange={this.changeEmail}
-              value={this.props.someUserEmail}
+              value={this.state.email}
           />
           <label className='input__label'>Phone : </label>
           <input
@@ -112,7 +117,7 @@ export default class ContactCreate extends Component {
               name='phone'
               placeholder='Phone'
               onChange={this.changePhone}
-              value={this.props.someUserPhone}
+              value={this.state.phone}
           />
 
           <label className='input__label'>address : </label>
@@ -122,7 +127,7 @@ export default class ContactCreate extends Component {
               name="address "
               placeholder='address '
               onChange={this.changeAddress}
-              value={this.props.someUserAddress}
+              value={this.state.address}
           />
 
           <label className='input__label'>Postcode : </label>
@@ -132,7 +137,7 @@ export default class ContactCreate extends Component {
               name="postcode "
               placeholder='postcode  '
               onChange={this.changePostcode}
-              value={this.props.someUserPostcode}
+              value={this.state.postcode}
           />
 
           <label className='input__label'>date of birth : </label>
@@ -142,7 +147,7 @@ export default class ContactCreate extends Component {
               name="date_of_birth "
               placeholder='date of birth '
               onChange={this.changeDate}
-              value={this.props.someUserDate}
+              value={this.state.date}
           />
           <footer className="plate__footer">
             <button

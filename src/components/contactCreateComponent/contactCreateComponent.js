@@ -69,13 +69,13 @@ export default class ContactCreate extends Component {
     document.querySelectorAll('.input__style').forEach((item) => {
       item.classList.remove('input__error')
     });
-
+    console.log("valid mail", this.state.emailValid);
     console.log(!!this.state.name.length
         && !!this.state.email.length
         && !!this.state.postcode.length
         && !!this.state.date.length);
     if (!!this.state.name.length
-        && !!this.state.email.length
+        && this.state.emailValid !== false && this.state.emailValid !== undefined
         && !!this.state.postcode.length
         && !!this.state.date.length
     ) {
@@ -85,7 +85,7 @@ export default class ContactCreate extends Component {
       } else {
         document.querySelector('.input__name').classList.add('input__error')
       }
-      if (!!this.state.email.length) {
+      if (this.state.emailValid === true) {
         this.props.changeStateProps('email', this.state.email);
       } else {
         document.querySelector('.input__email').classList.add('input__error')
@@ -107,7 +107,8 @@ export default class ContactCreate extends Component {
       if (!this.state.name.length) {
         document.querySelector('.input__name').classList.add('input__error')
       }
-      if (!this.state.email.length) {
+      console.log(this.state.emailValid);
+      if (this.state.emailValid === false || this.state.emailValid === undefined) {
         document.querySelector('.input__email').classList.add('input__error')
       }
 
@@ -133,13 +134,14 @@ export default class ContactCreate extends Component {
   }
 
   changeEmail(event) {
-    console.log(event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i));
     this.setState({email: event.target.value});
+    console.log(event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null);
+    if (event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null) {
+      this.setState({emailValid: true});
+    }
   }
 
   changePhone(event) {
-    // this.props.changeStateProps('phone', value)
-
     if (event.target.value.match(/^[0-9]+$/) != null) {
       this.setState({phone: event.target.value});
     }

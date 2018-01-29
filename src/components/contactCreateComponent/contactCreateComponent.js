@@ -30,16 +30,25 @@ export default class ContactCreate extends Component {
     this.clearState = this.clearState.bind(this)
 
   }
-clearState(){
-  this.setState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    postcode: '',
-    date: '',
-  });
-}
+
+  clearState() {
+    this.setState({
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      postcode: '',
+      date: '',
+      formErrors: {
+        name: '',
+        email: '',
+        postcode: '',
+        date: '',
+      },
+      emailValid: false,
+      formValid: false
+    });
+  }
 
   clearPlate(e) {
     e.preventDefault()
@@ -57,32 +66,83 @@ clearState(){
   addPlate(e) {
     e.preventDefault()
 
-    this.props.changeStateProps('name', this.state.name);
-    this.props.changeStateProps('email', this.state.email);
-    this.props.changeStateProps('phone', this.state.phone);
-    this.props.changeStateProps('address', this.state.address);
-    this.props.changeStateProps('postcode', this.state.postcode);
-    this.props.changeStateProps('date', this.state.date);
+    document.querySelectorAll('.input__style').forEach((item) => {
+      item.classList.remove('input__error')
+    });
+
+    console.log(!!this.state.name.length
+        && !!this.state.email.length
+        && !!this.state.postcode.length
+        && !!this.state.date.length);
+    if (!!this.state.name.length
+        && !!this.state.email.length
+        && !!this.state.postcode.length
+        && !!this.state.date.length
+    ) {
+
+      if (!!this.state.name.length) {
+        this.props.changeStateProps('name', this.state.name);
+      } else {
+        document.querySelector('.input__name').classList.add('input__error')
+      }
+      if (!!this.state.email.length) {
+        this.props.changeStateProps('email', this.state.email);
+      } else {
+        document.querySelector('.input__email').classList.add('input__error')
+      }
+      this.props.changeStateProps('phone', this.state.phone);
+      this.props.changeStateProps('address', this.state.address);
+      if (!!this.state.postcode.length) {
+        this.props.changeStateProps('postcode', this.state.postcode);
+      } else {
+        document.querySelector('.input__postcode').classList.add('input__error')
+      }
+      if (this.state.date.length) {
+        this.props.changeStateProps('date', this.state.date);
+      } else {
+        document.querySelector('.input__date').classList.add('input__error')
+      }
+    } else {
+      console.log(!this.state.name.length);
+      if (!this.state.name.length) {
+        document.querySelector('.input__name').classList.add('input__error')
+      }
+      if (!this.state.email.length) {
+        document.querySelector('.input__email').classList.add('input__error')
+      }
+
+      if (!this.state.postcode.length) {
+        document.querySelector('.input__postcode').classList.add('input__error')
+      }
+      if (!this.state.date.length) {
+        document.querySelector('.input__date').classList.add('input__error')
+      }
 
 
-    this.clearState()
+      // this.clearState()
+
+    }
   }
 
   componentDidMount() {
-    console.log('props in component', this.props)
+    // console.log('props in component', this.props)
   }
 
-  changeName(event) {  
+  changeName(event) {
     this.setState({name: event.target.value});
   }
 
   changeEmail(event) {
+    console.log(event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i));
     this.setState({email: event.target.value});
   }
 
   changePhone(event) {
     // this.props.changeStateProps('phone', value)
-    this.setState({phone: event.target.value});
+
+    if (event.target.value.match(/^[0-9]+$/) != null) {
+      this.setState({phone: event.target.value});
+    }
   }
 
   changeAddress(event) {
@@ -106,7 +166,8 @@ clearState(){
         <form className="plate">
           <label className='input__label'>Name : </label>
           <input
-              className='input__style'
+
+              className='input__name input__style'
               type='text'
               onChange={this.changeName}
               placeholder='Name'
@@ -115,7 +176,7 @@ clearState(){
 
           <label className='input__label'>Email : </label>
           <input
-              className='input__style'
+              className=' input__email input__style'
               type='text'
               placeholder='Email'
               onChange={this.changeEmail}
@@ -123,7 +184,7 @@ clearState(){
           />
           <label className='input__label'>Phone : </label>
           <input
-              className='input__style'
+              className='input__phone input__style'
               type='text'
               name='phone'
               placeholder='Phone'
@@ -133,7 +194,7 @@ clearState(){
 
           <label className='input__label'>address : </label>
           <input
-              className='input__style'
+              className='input__address input__style'
               type='text'
               name="address "
               placeholder='address '
@@ -143,7 +204,7 @@ clearState(){
 
           <label className='input__label'>Postcode : </label>
           <input
-              className='input__style'
+              className='input__postcode input__style'
               type='text'
               name="postcode "
               placeholder='postcode  '
@@ -153,7 +214,7 @@ clearState(){
 
           <label className='input__label'>date of birth : </label>
           <input
-              className='input__style'
+              className='input__date input__style'
               type="date"
               name="date_of_birth "
               placeholder='date of birth '
@@ -175,3 +236,5 @@ clearState(){
     )
   }
 }
+
+

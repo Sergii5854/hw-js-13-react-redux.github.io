@@ -31,6 +31,13 @@
   box-shadow: none;
   outline: none;
 }
+.input__error{
+  border-color: red;
+  border-style: none none solid none;
+  width: 100%;
+  outline: none;
+}
+
 .plate__footer{
   //box-shadow: 0 2px 8px 0 rgba(0,0,0,0.5);
   padding:  10px 0;

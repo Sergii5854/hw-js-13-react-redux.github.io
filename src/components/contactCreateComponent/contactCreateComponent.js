@@ -196,7 +196,7 @@ export default class ContactCreate extends Component {
     return (
 
         <form className="plate">
-          <label className='input__label'>Name : </label>
+          <label className='input__label'>Name :
           <input
 
               className='input__name input__style'
@@ -205,8 +205,9 @@ export default class ContactCreate extends Component {
               placeholder='Name'
               value={this.state.name}
           />
+          </label>
 
-          <label className='input__label'>Email : </label>
+          <label className='input__label'>Email :
           <input
               className=' input__email input__style'
               type='text'
@@ -214,7 +215,8 @@ export default class ContactCreate extends Component {
               onChange={this.changeEmail}
               value={this.state.email}
           />
-          <label className='input__label'>Phone : </label>
+          </label>
+          <label className='input__label'>Phone :
           <input
               className='input__phone input__style'
               type='text'
@@ -223,8 +225,8 @@ export default class ContactCreate extends Component {
               onChange={this.changePhone}
               value={this.state.phone}
           />
-
-          <label className='input__label'>address : </label>
+          </label>
+          <label className='input__label'>address :
           <input
               className='input__address input__style'
               type='text'
@@ -233,8 +235,8 @@ export default class ContactCreate extends Component {
               onChange={this.changeAddress}
               value={this.state.address}
           />
-
-          <label className='input__label'>Postcode : </label>
+          </label>
+          <label className='input__label'>Postcode :
           <input
               className='input__postcode input__style'
               type='text'
@@ -243,8 +245,8 @@ export default class ContactCreate extends Component {
               onChange={this.changePostcode}
               value={this.state.postcode}
           />
-
-          <label className='input__label'>date of birth : </label>
+          </label>
+          <label className='input__label'>date of birth :
           <input
               className='input__date input__style'
               type="date"
@@ -253,6 +255,7 @@ export default class ContactCreate extends Component {
               onChange={this.changeDate}
               value={this.state.date}
           />
+          </label>
           <footer className="plate__footer">
             <button
                 onClick={this.addPlate}

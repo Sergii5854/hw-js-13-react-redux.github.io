@@ -1,6 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-*.css.map*
-*.css*
+*.css.map
+*.css
+/src/components/*.css
+/src/components/*.css.map
 # dependencies
 /node_modules
 .idea/

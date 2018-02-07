@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import './index.css'
+import './style.css'
+
 export default class Test extends Component {
   componentDidMount() {
     console.log('props in component', this.props)

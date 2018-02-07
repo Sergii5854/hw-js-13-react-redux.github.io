@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { changeStateProps } from '../../actions'
-import ContactCreate from './contactCreateComponent'
+import ContactCreate from './index'
 
 const mapStateToProps = (state, ownProps) => {
   console.log('state', state)

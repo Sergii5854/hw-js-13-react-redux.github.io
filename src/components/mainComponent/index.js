@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 
-import  './mainComponent.css'
-import MainTitle from './../mainTitle/mainTitle'
-import ContactCreate from './../contactCreateComponent/contactCreateComponentContainer'
-import SecondComponent from './../secondComponent/secondComponentContainer'
+import  './style.css'
+import MainTitle from './../mainTitle/index'
+import ContactCreate from './../contactCreateComponent/'
+import SecondComponent from './../secondComponent/'
 
 
 export default class MainComponent extends Component {

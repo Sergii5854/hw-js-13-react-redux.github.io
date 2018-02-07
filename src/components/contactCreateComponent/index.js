@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 
-import './contactCreateComponent.css'
+import './style.css'
 
 export default class ContactCreate extends Component {
   constructor(props) {
@@ -256,7 +256,7 @@ export default class ContactCreate extends Component {
               value={this.state.date}
           />
           </label>
-          <footer className="plate__footer">
+          <div className="plate__footer">
             <button
                 onClick={this.addPlate}
                 className="button button__add">
@@ -265,7 +265,7 @@ export default class ContactCreate extends Component {
                 onClick={this.clearPlate}
                 className="button button__clear">
             </button>
-          </footer>
+          </div>
 
         </form>
     )

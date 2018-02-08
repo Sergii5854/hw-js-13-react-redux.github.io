@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import  './style.css'
 import MainTitle from './../mainTitle/index'
 import ContactCreate from './../contactCreateComponent/'
-import SecondComponent from './../secondComponent/'
+import ResultComponent from './../resultComponent/'
 
 
 export default class MainComponent extends Component {
@@ -13,7 +13,7 @@ export default class MainComponent extends Component {
           <MainTitle />
           <div className="list">
             <ContactCreate testName='Test'/>
-            <SecondComponent />
+            <ResultComponent />
           </div>
 
         </div>

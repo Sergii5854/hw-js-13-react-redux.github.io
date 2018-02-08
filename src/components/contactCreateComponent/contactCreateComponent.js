@@ -6,13 +6,8 @@ const mapStateToProps = (state, ownProps) => {
   console.log('state', state)
   console.log('ownProps', ownProps)
   return {
-    someUserName: state.main.name,
-    someUserEmail: state.main.email,
-    someUserPhone: state.main.phone,
-    someUserAddres: state.main.address,
-    someUserPostcode: state.main.postcode,
-    someUserDate: state.main.date,
-    isUserEqual: state.main.name === ownProps.testName,
+    user: state.main.user,
+    show: state.main.show,
     ...ownProps
   }
 }

@@ -1,65 +1,56 @@
 import React, {Component} from 'react'
 
-
+import update from 'immutability-helper'
 import './style.css'
 
 export default class ContactCreate extends Component {
   constructor(props) {
     super(props)
-    this.reset = {}
-    this.state = {
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      postcode: '',
-      date: '',
 
-      nameValid: false,
-      emailValid: false,
-      phoneValid: false,
-      postcodeValid: false,
-      dateValid: false,
-      formValid: false
+    this.state = {
+      user: this.user ={
+        name: ""
+      } ,
+      formValid: true
     };
 
 
     this.changeName = this.changeName.bind(this)
-    this.changeEmail = this.changeEmail.bind(this)
-    this.changePhone = this.changePhone.bind(this)
-    this.changePostcode = this.changePostcode.bind(this)
-    this.changeAddress = this.changeAddress.bind(this)
-    this.changeDate = this.changeDate.bind(this)
+    // this.changeEmail = this.changeEmail.bind(this)
+    // this.changePhone = this.changePhone.bind(this)
+    // this.changePostcode = this.changePostcode.bind(this)
+    // this.changeAddress = this.changeAddress.bind(this)
+    // this.changeDate = this.changeDate.bind(this)
+    this.save = this.save.bind(this)
 
-
-    this.addPlate = this.addPlate.bind(this)
+    // this.addPlate = this.addPlate.bind(this)
     this.clearPlate = this.clearPlate.bind(this)
-    this.clearState = this.clearState.bind(this)
+    // this.clearState = this.clearState.bind(this)
 
   }
 
-  clearState() {
-    this.setState({
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      postcode: '',
-      date: '',
-      formErrors: {
-        name: '',
-        email: '',
-        postcode: '',
-        date: '',
-      },
-      nameValid: false,
-      emailValid: false,
-      phoneValid: false,
-      postcodeValid: false,
-      dateValid: false,
-      formValid: false
-    });
-  }
+  // clearState() {
+  //   this.setState({
+  //     name: '',
+  //     email: '',
+  //     phone: '',
+  //     address: '',
+  //     postcode: '',
+  //     date: '',
+  //     formErrors: {
+  //       name: '',
+  //       email: '',
+  //       postcode: '',
+  //       date: '',
+  //     },
+  //     nameValid: false,
+  //     emailValid: false,
+  //     phoneValid: false,
+  //     postcodeValid: false,
+  //     dateValid: false,
+  //     formValid: false
+  //   });
+  // }
 
   clearPlate(e) {
     e.preventDefault();
@@ -70,126 +61,164 @@ export default class ContactCreate extends Component {
     this.props.changeStateProps('postcode', '');
     this.props.changeStateProps('date', '');
 
-    this.clearState()
+    // this.clearState()
 
   }
 
-  addPlate(e) {
-    e.preventDefault()
-
-    document.querySelectorAll('.input__style').forEach((item) => {
-      item.classList.remove('input__error')
-    });
-
-    if (this.state.nameValid !== false && this.state.nameValid !== undefined
-        && this.state.emailValid !== false && this.state.emailValid !== undefined
-        && this.state.postcodeValid !== false && this.state.postcodeValid !== undefined
-        && this.state.dateValid !== false && this.state.dateValid !== undefined){
-
-      if (this.state.nameValid === true) {
-        this.props.changeStateProps('name', this.state.name);
-      } else {
-        document.querySelector('.input__name').classList.add('input__error')
-      }
-
-      if (this.state.emailValid === true) {
-        this.props.changeStateProps('email', this.state.email);
-      } else {
-        document.querySelector('.input__email').classList.add('input__error')
-      }
-
-      this.props.changeStateProps('phone', this.state.phone);
-      this.props.changeStateProps('address', this.state.address);
-
-      if (this.state.postcodeValid === true) {
-        this.props.changeStateProps('postcode', this.state.postcode);
-      } else {
-        document.querySelector('.input__postcode').classList.add('input__error')
-      }
-
-      if (this.state.dateValid === true) {
-        this.props.changeStateProps('date', this.state.date);
-      } else {
-        document.querySelector('.input__date').classList.add('input__error')
-      }
-
-      this.clearState()
-
-    } else {
-
-      if (this.state.nameValid === false || this.state.nameValid === undefined) {
-        document.querySelector('.input__name').classList.add('input__error')
-      }
-
-      if (this.state.emailValid === false || this.state.emailValid === undefined) {
-        document.querySelector('.input__email').classList.add('input__error')
-      }
-
-      if (this.state.postcodeValid === false || this.state.postcodeValid === undefined) {
-        document.querySelector('.input__postcode').classList.add('input__error')
-      }
-      if (this.state.dateValid === false || this.state.dateValid === undefined) {
-        document.querySelector('.input__date').classList.add('input__error')
-      }
-
-
-    }
-  }
+  // addPlate(e) {
+  //   e.preventDefault()
+  //
+  //   document.querySelectorAll('.input__style').forEach((item) => {
+  //     item.classList.remove('input__error')
+  //   });
+  //
+  //   if (this.state.nameValid !== false && this.state.nameValid !== undefined
+  //       && this.state.emailValid !== false && this.state.emailValid !== undefined
+  //       && this.state.postcodeValid !== false && this.state.postcodeValid !== undefined
+  //       && this.state.dateValid !== false && this.state.dateValid !== undefined){
+  //
+  //     if (this.state.nameValid === true) {
+  //       this.props.changeStateProps({'user': this.state.name});
+  //     } else {
+  //       document.querySelector('.input__name').classList.add('input__error')
+  //     }
+  //
+  //     if (this.state.emailValid === true) {
+  //       this.props.changeStateProps('email', this.state.email);
+  //     } else {
+  //       document.querySelector('.input__email').classList.add('input__error')
+  //     }
+  //
+  //     this.props.changeStateProps('phone', this.state.phone);
+  //     this.props.changeStateProps('address', this.state.address);
+  //
+  //     if (this.state.postcodeValid === true) {
+  //       this.props.changeStateProps('postcode', this.state.postcode);
+  //     } else {
+  //       document.querySelector('.input__postcode').classList.add('input__error')
+  //     }
+  //
+  //     if (this.state.dateValid === true) {
+  //       this.props.changeStateProps('date', this.state.date);
+  //     } else {
+  //       document.querySelector('.input__date').classList.add('input__error')
+  //     }
+  //
+  //     this.clearState()
+  //
+  //   } else {
+  //
+  //     if (this.state.nameValid === false || this.state.nameValid === undefined) {
+  //       document.querySelector('.input__name').classList.add('input__error')
+  //     }
+  //
+  //     if (this.state.emailValid === false || this.state.emailValid === undefined) {
+  //       document.querySelector('.input__email').classList.add('input__error')
+  //     }
+  //
+  //     if (this.state.postcodeValid === false || this.state.postcodeValid === undefined) {
+  //       document.querySelector('.input__postcode').classList.add('input__error')
+  //     }
+  //     if (this.state.dateValid === false || this.state.dateValid === undefined) {
+  //       document.querySelector('.input__date').classList.add('input__error')
+  //     }
+  //
+  //
+  //   }
+  // }
 
   componentDidMount() {
-    // console.log('props in component', this.props)
+     console.log('props in component', this.props.user)
   }
 
-  changeName(event) {
-    this.setState({name: event.target.value});
+  changeName({target: {value, name}}) {
+    if (name === 'name' && (!value || value.length === 0)) {
+      // errors['nameError'] = 'This field should not be blank.'
 
-    if (event.target.value.length > 2) {
-      this.setState({nameValid: true});
-    } else {
-      this.setState({nameValid: false});
     }
+    this.setState({
+      user: update(this.state.user, {
+        [name]: {$set: value}
+      })
+    })
+    // this.setState({name: event.target.value});
+    //
+    // if (event.target.value.length > 2) {
+    //   this.setState({nameValid: true});
+    // } else {
+    //   this.setState({nameValid: false});
+    // }
   }
-
-  changeEmail(event) {
-    this.setState({email: event.target.value});
-
-    if (event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null) {
-      this.setState({emailValid: true});
-    } else {
-      this.setState({emailValid: false});
+  //
+  // changeEmail(event) {
+  //   this.setState({email: event.target.value});
+  //
+  //   if (event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null) {
+  //     this.setState({emailValid: true});
+  //   } else {
+  //     this.setState({emailValid: false});
+  //   }
+  // }
+  //
+  // changePhone(event) {
+  //   if (event.target.value.match(/^[0-9]+$/) !== null) {
+  //     this.setState({phone: event.target.value});
+  //   }
+  // }
+  //
+  // changeAddress(event) {
+  //   this.setState({address: event.target.value});
+  // }
+  //
+  // changePostcode(event) {
+  //
+  //   this.setState({postcode: event.target.value});
+  //
+  //   if (event.target.value.length >= 5 && event.target.value.length < 10) {
+  //     this.setState({postcodeValid: true});
+  //   } else {
+  //      this.setState({postcodeValid: false});
+  //   }
+  // }
+  //
+  // changeDate(event) {
+  //
+  //   this.setState({date: event.target.value});
+  //
+  //   if (event.target.value.match(/(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/)) {
+  //     this.setState({dateValid: true});
+  //   } else {
+  //      this.setState({dateValid: false});
+  //   }
+  // }
+  save() {
+    if (!this.state.formValid) {
+      return
     }
-  }
+    // if (this.props.show) {
+    //   this.setState({
+    //     user: this.props.user,
+    //     errors: {}
+    //   }, () => this.props.changeStateProps('show', false))
+    //   return
+    // }
 
-  changePhone(event) {
-    if (event.target.value.match(/^[0-9]+$/) !== null) {
-      this.setState({phone: event.target.value});
+    this.props.changeStateProps('user', this.state.user)
+    // this.props.changeStateProps('show', true)
+
+    if (this.state.formValid) {
+      this.setState({
+        user: {
+          name: '',
+          email: '',
+          phone: '',
+          address: '',
+          postcode: '',
+          dateOfBirth: null,
+        }
+      })
     }
-  }
 
-  changeAddress(event) {
-    this.setState({address: event.target.value});
-  }
-
-  changePostcode(event) {
-
-    this.setState({postcode: event.target.value});
-
-    if (event.target.value.length >= 5 && event.target.value.length < 10) {
-      this.setState({postcodeValid: true});
-    } else {
-       this.setState({postcodeValid: false});
-    }
-  }
-
-  changeDate(event) {
-
-    this.setState({date: event.target.value});
-
-    if (event.target.value.match(/(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/)) {
-      this.setState({dateValid: true});
-    } else {
-       this.setState({dateValid: false});
-    }
   }
 
   render() {
@@ -198,12 +227,12 @@ export default class ContactCreate extends Component {
         <form className="plate">
           <label className='input__label'>Name :
           <input
-
+              name="name"
               className='input__name input__style'
               type='text'
               onChange={this.changeName}
               placeholder='Name'
-              value={this.state.name}
+              value={this.state.user.name}
           />
           </label>
 

@@ -1,7 +1,7 @@
 import update from 'immutability-helper'
 
 let defaultState = {
-    show: false
+    show: true
 }
 
 const main = (state = defaultState, action) => {

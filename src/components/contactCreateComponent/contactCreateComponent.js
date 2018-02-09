@@ -3,11 +3,12 @@ import { changeStateProps } from '../../actions'
 import ContactCreate from './index'
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('state', state)
-  console.log('ownProps', ownProps)
+  // console.log('state', state)
+  // console.log('ownProps', ownProps)
   return {
-    user: state.main.user,
-    show: state.main.show,
+    user: state.main.user={
+      formValid:true
+    },
     ...ownProps
   }
 }

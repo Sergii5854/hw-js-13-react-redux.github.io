@@ -38,26 +38,33 @@
   outline: none;
 }
 
+//.button{
+//  width: 30px;
+//  height: 30px;
+//  cursor: pointer;
+//  border: none;
+//  outline: none;
+//  margin: 5px;
+//}
+//.button__add{
+//  background: url('https://image.flaticon.com/icons/png/512/60/60745.png') center no-repeat;
+//  background-size: contain;
+//}
+//
+//.button__clear{
+//  background: url('https://image.flaticon.com/icons/png/512/60/60578.png') center no-repeat;
+//  background-size: contain;
+//}
+
 .plate__footer{
   //box-shadow: 0 2px 8px 0 rgba(0,0,0,0.5);
   padding:  10px 0;
   display: flex;
-  justify-content: flex-end;
-}
-.button{
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  margin: 5px;
-}
-.button__add{
-  background: url('https://image.flaticon.com/icons/png/512/60/60745.png') center no-repeat;
-  background-size: contain;
+
 }
 
-.button__clear{
-  background: url('https://image.flaticon.com/icons/png/512/60/60578.png') center no-repeat;
-  background-size: contain;
+.plate__footer-error{
+  color: red;
+  font-size: 14px;
+  padding: 10px 0;
 }

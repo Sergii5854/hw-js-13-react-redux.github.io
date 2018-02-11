@@ -3,12 +3,10 @@ import { changeStateProps } from '../../actions'
 import ContactCreate from './index'
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('state', state)
-  // console.log('ownProps', ownProps)
+
   return {
-    user: state.main.user={
-      formValid:true
-    },
+    user: state.main.user,
+    showResult: state.main.showResult,
     ...ownProps
   }
 }
@@ -19,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(changeStateProps(prop, value))
     }
   }
-}
+};
 
 export default connect(
   mapStateToProps,

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 import update from 'immutability-helper'
 import './style.css'
 
@@ -8,7 +7,7 @@ export default class ContactCreate extends Component {
     super(props);
 
     this.state = {
-
+      user: this.props.user,
       name: '',
       email: '',
       phone: '',
@@ -42,32 +41,8 @@ export default class ContactCreate extends Component {
 
   }
 
-  // clearState() {
-  //   this.setState({
-  //     name: '',
-  //     email: '',
-  //     phone: '',
-  //     address: '',
-  //     postcode: '',
-  //     date: '',
-  //     formErrors: {
-  //       name: '',
-  //       email: '',
-  //       postcode: '',
-  //       date: '',
-  //     },
-  //     nameValid: false,
-  //     emailValid: false,
-  //     phoneValid: false,
-  //     postcodeValid: false,
-  //     dateValid: false,
-  //     formValid: false
-  //   });
-  // }
-
-
   componentDidMount() {
-    console.log('props in component', this.props)
+    console.log('props in component create', this.props)
   }
 
   changeName(event) {
@@ -77,7 +52,7 @@ export default class ContactCreate extends Component {
     if (event.target.value.length > 2) {
       this.setState({
         nameValid: true,
-        errors: {name: ''}
+        errorsName: ''
       });
 
     } else {
@@ -86,6 +61,7 @@ export default class ContactCreate extends Component {
         errorsName: 'Your name should be more long'
       });
     }
+    this.updateState()
   }
 
 
@@ -104,13 +80,13 @@ export default class ContactCreate extends Component {
       });
 
     }
+    this.updateState()
 
   }
 
   changePhone(event) {
-    if (event.target.value.match(/^[0-9]+$/) !== null) {
-      this.setState({phone: event.target.value});
-    }
+    this.setState({phone: event.target.value});
+    this.updateState()
   }
 
   changeAddress(event) {
@@ -121,8 +97,7 @@ export default class ContactCreate extends Component {
 
     this.setState({postcode: event.target.value});
 
-    if (event.target.value.length >= 5 && event.target.value.length < 10) {
-
+    if (event.target.value.length >= 5 && event.target.value.length <= 10) {
       this.setState({
         postcodeValid: true,
         errorsPostcode: ''
@@ -133,35 +108,52 @@ export default class ContactCreate extends Component {
         errorsPostcode: 'Postcode should be from 5 to 10 symbols'
       });
     }
+    this.updateState()
   }
 
   changeDate(event) {
     this.setState({date: event.target.value});
 
-    if (event.target.value.match(/(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/) !== null) {
+    if (!!event.target.value) {
 
       this.setState({
         dateValid: true,
-        errorsDate:''
+        errorsDate: ''
       });
+
     } else {
       this.setState({
         dateValid: false,
         errorsDate: 'Not valid format of Date'
       });
+
+      this.updateState()
     }
+
   }
 
   updateState() {
 
-    console.log(this.state);
-    if (this.state.formValid &&
-        this.state.nameValid && this.state.nameValid !== undefined
-        && this.state.emailValid && this.state.emailValid !== undefined
-        && this.state.postcodeValid && this.state.postcodeValid !== undefined
-        && this.state.dateValid && this.state.dateValid !== undefined) {
+    // this.props.changeStateProps('showResult', false);
+    if (this.state.nameValid && this.state.emailValid && this.state.postcodeValid && this.state.dateValid) {
 
-      this.props.changeStateProps('user', this.state)
+      const objUser = {
+        name: this.state.name,
+        email: this.state.email,
+        date: this.state.date,
+        postcode: this.state.postcode,
+        phone: this.state.phone,
+        address: this.state.address
+      };
+
+      this.setState({
+        user: update(this.props.user, {$set: objUser})
+
+      });
+
+      console.log('this.state.user',this.state.user);
+      console.log('props', this.props, this.props.user);
+      // this.props.changeStateProps('showResult', true);
 
     }
 
@@ -198,7 +190,31 @@ export default class ContactCreate extends Component {
                 value={this.state.email}
             />
             <p className="input__errors-info">{this.state.errorsEmail}</p>
-        </label>
+          </label>
+          <label className='input__label'>date of birth :
+            <input
+                className={`input__date input__style ${date}`}
+                type="date"
+                pattern="\d{1,2}/\d{1,2}/\d{4}"
+                name="date_of_birth "
+                placeholder='date of birth '
+                onChange={this.changeDate}
+                value={this.state.date}
+            />
+
+            <p className="input__errors-info">  {this.state.errorsDate}</p>
+          </label>
+          <label className='input__label'>Postcode :
+            <input
+                className={`input__postcode input__style ${postcode}`}
+                type='text'
+                name="postcode "
+                placeholder='postcode  '
+                onChange={this.changePostcode}
+                value={this.state.postcode}
+            />
+            <p className="input__errors-info"> {this.state.errorsPostcode}</p>
+          </label>
           <label className='input__label'>Phone :
             <input
                 className='input__phone input__style'
@@ -219,29 +235,6 @@ export default class ContactCreate extends Component {
                 value={this.state.address}
             />
           </label>
-          <label className='input__label'>Postcode :
-            <input
-                className={`input__postcode input__style ${postcode}`}
-                type='text'
-                name="postcode "
-                placeholder='postcode  '
-                onChange={this.changePostcode}
-                value={this.state.postcode}
-            />
-            <p className="input__errors-info"> {this.state.errorsPostcode}</p>
-          </label>
-          <label className='input__label'>date of birth :
-            <input
-                className={`input__date input__style ${date}`}
-                type="date"
-                name="date_of_birth "
-                placeholder='date of birth '
-                onChange={this.changeDate}
-                value={this.state.date}
-            />
-            <p className="input__errors-info">  {this.state.errorsDate}</p>
-          </label>
-
         </form>
     )
   }

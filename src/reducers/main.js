@@ -1,7 +1,8 @@
 import update from 'immutability-helper'
 
 let defaultState = {
-    show: true
+  showResult: false,
+  user: "defaultUser"
 }
 
 const main = (state = defaultState, action) => {

@@ -4,14 +4,15 @@
   "private": true,
   "homepage": "https://github.com/Sergii5854/hw-js-13-react-redux.github.io/",
   "dependencies": {
+    "gh-pages": "^1.1.0",
     "immutability-helper": "^2.6.4",
     "react": "^16.2.0",
+    "react-datepicker": "^1.1.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-scripts": "1.1.0",
     "redux": "^3.7.2",
-    "redux-persist": "^5.5.0",
-    "gh-pages": "^1.1.0"
+    "redux-persist": "^5.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

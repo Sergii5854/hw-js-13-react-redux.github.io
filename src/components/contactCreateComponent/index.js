@@ -7,7 +7,7 @@ export default class ContactCreate extends Component {
     super(props);
 
     this.state = {
-      user: this.props.user,
+      user: '',
       name: '',
       email: '',
       phone: '',

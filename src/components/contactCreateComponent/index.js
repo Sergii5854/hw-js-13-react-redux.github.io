@@ -5,16 +5,13 @@ import './style.css'
 export default class ContactCreate extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      user: '',
       name: '',
       email: '',
       phone: '',
       address: '',
       postcode: '',
       date: '',
-      formValid: true,
 
       nameValid: false,
       emailValid: false,
@@ -24,8 +21,7 @@ export default class ContactCreate extends Component {
       errorsName: '',
       errorsEmail: '',
       errorsPostcode: '',
-      errorsDate: '',
-
+      errorsDate: ''
     };
 
     this.changeName = this.changeName.bind(this);
@@ -42,28 +38,25 @@ export default class ContactCreate extends Component {
   }
 
   changeName(event) {
-
+    this.updateState()
     this.setState({name: event.target.value});
-
     if (event.target.value.length > 2) {
       this.setState({
         nameValid: true,
         errorsName: ''
       });
-
     } else {
       this.setState({
         nameValid: false,
         errorsName: 'Your name should be more long'
       });
     }
-    this.updateState()
   }
 
 
   changeEmail(event) {
+    this.updateState()
     this.setState({email: event.target.value});
-
     if (event.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null) {
       this.setState({
         emailValid: true,
@@ -75,20 +68,20 @@ export default class ContactCreate extends Component {
         errorsEmail: 'This is not email'
       });
     }
-    this.updateState()
-  }
+      }
 
   changePhone(event) {
-    this.setState({phone: event.target.value});
     this.updateState()
+    this.setState({phone: event.target.value});
   }
 
   changeAddress(event) {
-    this.setState({address: event.target.value});
     this.updateState()
+    this.setState({address: event.target.value});
   }
 
   changePostcode(event) {
+    this.updateState()
     this.setState({postcode: event.target.value});
 
     if (event.target.value.length >= 5 && event.target.value.length <= 10) {
@@ -102,31 +95,29 @@ export default class ContactCreate extends Component {
         errorsPostcode: 'Postcode should be from 5 to 10 symbols'
       });
     }
-    this.updateState()
   }
 
   changeDate(event) {
+    this.updateState()
     this.setState({date: event.target.value});
 
     if (!!event.target.value) {
-
       this.setState({
         dateValid: true,
         errorsDate: ''
       });
-
     } else {
       this.setState({
         dateValid: false,
         errorsDate: 'Not valid format of Date'
       });
     }
-    this.updateState()
   }
 
 
   updateState() {
-     // this.props.changeStateProps('showResult', false);
+    this.props.changeStateProps('showResult', false);
+
     if (this.state.nameValid && this.state.emailValid && this.state.postcodeValid && this.state.dateValid) {
 
       const objUser = {
@@ -137,26 +128,25 @@ export default class ContactCreate extends Component {
         phone: this.state.phone,
         address: this.state.address
       };
-
-      this.setState({
-        user: update(this.props.user, {$set: objUser})
-
-      });
-
-      console.log('this.state.user',this.state.user);
-      console.log('props', this.props, this.props.user);
-      // this.props.changeStateProps('showResult', true);
+      this.props.changeStateProps('user', objUser);
+      this.props.changeStateProps('showResult', true);
     }
   }
 
 
-
   render() {
-
-    let name = this.state.nameValid ? '' : 'input__error';
-    let email = this.state.emailValid ? '' : 'input__error';
-    let postcode = this.state.postcodeValid ? '' : 'input__error';
-    let date = this.state.dateValid ? '' : 'input__error';
+    let name = this.props.user
+        ? this.state.nameValid ? '' : 'input__error'
+        : '';
+    let email = this.props.user
+        ? this.state.emailValid ? '' : 'input__error'
+        : '';
+    let postcode = this.props.user
+        ? this.state.postcodeValid ? '' : 'input__error'
+        : '';
+    let date = this.props.user
+        ? this.state.dateValid ? '' : 'input__error'
+        : '';
 
     return (
 

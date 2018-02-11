@@ -8,8 +8,8 @@ export default class resultComponent extends Component {
 
   render() {
 
-     console.log("user result", this.props.showResult);
-    if(this.props.showResult){
+     console.log("user result",this.props, this.props.showResult);
+    if(this.props.showResult ){
     return (
         <div className="result">
 

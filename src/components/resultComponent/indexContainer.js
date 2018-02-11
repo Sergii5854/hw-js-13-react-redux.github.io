@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import SecondComponent from './index'
+import resultComponent from './index'
 
 const mapStateToProps = (state, ownProps) => {
   return {

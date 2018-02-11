@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import update from 'immutability-helper'
+import update from "immutability-helper"
 import './style.css'
 
 export default class ContactCreate extends Component {
@@ -28,7 +28,6 @@ export default class ContactCreate extends Component {
 
     };
 
-
     this.changeName = this.changeName.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
     this.changePhone = this.changePhone.bind(this);
@@ -36,9 +35,6 @@ export default class ContactCreate extends Component {
     this.changeAddress = this.changeAddress.bind(this);
     this.changeDate = this.changeDate.bind(this);
     this.updateState = this.updateState.bind(this);
-
-    // this.clearState = this.clearState.bind(this)
-
   }
 
   componentDidMount() {
@@ -78,10 +74,8 @@ export default class ContactCreate extends Component {
         emailValid: false,
         errorsEmail: 'This is not email'
       });
-
     }
     this.updateState()
-
   }
 
   changePhone(event) {
@@ -91,10 +85,10 @@ export default class ContactCreate extends Component {
 
   changeAddress(event) {
     this.setState({address: event.target.value});
+    this.updateState()
   }
 
   changePostcode(event) {
-
     this.setState({postcode: event.target.value});
 
     if (event.target.value.length >= 5 && event.target.value.length <= 10) {
@@ -126,15 +120,13 @@ export default class ContactCreate extends Component {
         dateValid: false,
         errorsDate: 'Not valid format of Date'
       });
-
-      this.updateState()
     }
-
+    this.updateState()
   }
 
-  updateState() {
 
-    // this.props.changeStateProps('showResult', false);
+  updateState() {
+     // this.props.changeStateProps('showResult', false);
     if (this.state.nameValid && this.state.emailValid && this.state.postcodeValid && this.state.dateValid) {
 
       const objUser = {
@@ -154,10 +146,10 @@ export default class ContactCreate extends Component {
       console.log('this.state.user',this.state.user);
       console.log('props', this.props, this.props.user);
       // this.props.changeStateProps('showResult', true);
-
     }
-
   }
+
+
 
   render() {
 
@@ -180,7 +172,6 @@ export default class ContactCreate extends Component {
             />
             <p className="input__errors-info"> {this.state.errorsName}</p>
           </label>
-
           <label className='input__label'>Email :
             <input
                 className={`input__email input__style ${email}`}

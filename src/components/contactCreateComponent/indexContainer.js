@@ -6,7 +6,9 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     user: state.main.user,
+    isUserEqual: state.main.name === ownProps.testName,
     showResult: state.main.showResult,
+
     ...ownProps
   }
 }
